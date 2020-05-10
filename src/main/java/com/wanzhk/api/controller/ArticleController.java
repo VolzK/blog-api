@@ -5,12 +5,13 @@ import com.wanzhk.api.base.AjaxResult;
 import com.wanzhk.api.modules.entity.TbArticle;
 import com.wanzhk.api.service.ArticleService;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.validation.Valid;
+import java.util.Date;
+import java.util.Objects;
 
 /**
  * 文章
@@ -70,5 +71,41 @@ public class ArticleController {
         return AjaxResult.error("删除失败");
     }
 
+    /**
+     * 保存
+     *
+     * @param article
+     * @return
+     */
+    @PostMapping("/save")
+    public AjaxResult saveArticle(@Valid @RequestBody TbArticle article, BindingResult result) {
+        if (result.hasErrors()) {
+            return AjaxResult.error(Objects.requireNonNull(result.getFieldError()).getDefaultMessage());
+        }
+        boolean save = articleService.save(article);
+        if (save) {
+            return AjaxResult.success("ok");
+        }
+        return AjaxResult.error("保存失败");
+    }
+
+    /**
+     * 修改文章
+     *
+     * @param article
+     * @return
+     */
+    @PostMapping("/update")
+    public AjaxResult updateArticle(@Valid @RequestBody TbArticle article, BindingResult result) {
+        if (result.hasErrors()) {
+            return AjaxResult.error(Objects.requireNonNull(result.getFieldError().getDefaultMessage()));
+        }
+        article.setUpdateTime(new Date());
+        boolean b = articleService.updateById(article);
+        if (b) {
+            return AjaxResult.success("ok");
+        }
+        return AjaxResult.error("修改失败");
+    }
 
 }
