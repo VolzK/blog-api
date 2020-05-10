@@ -1,0 +1,27 @@
+server:
+  port: 9090
+  servlet:
+    context-path: /api
+
+
+spring:
+  datasource:
+    username: root
+    password: admin
+    url: jdbc:mysql://localhost:3306/blog?useUnicode=true&characterEncoding=utf8&autoReconnect=true&serverTimezone=GMT%2B8
+    type: com.zaxxer.hikari.HikariDataSource
+
+  jackson:
+    # 时间格式化
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+    # null字段不返回前端
+    default-property-inclusion: non_null
+
+
+mybatis-plus:
+  mapper-locations: classpath*:/mapper/**/*Mapper.xml
+  type-aliases-package: com.wanzhk.blog.entity
+  configuration:
+    map-underscore-to-camel-case: true
+#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
