@@ -1,2 +1,2 @@
-# blog-management-system-api
-🤟 blog-management-system的配套后台API接口
+# MyBlog-Server
+🤟 MyBlog-Vue-Admin的配套后台API接口
