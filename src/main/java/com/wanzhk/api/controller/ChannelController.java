@@ -3,6 +3,7 @@ package com.wanzhk.api.controller;
 import com.wanzhk.api.base.AjaxResult;
 import com.wanzhk.api.modules.entity.TbChannel;
 import com.wanzhk.api.service.ChannelService;
+import io.swagger.annotations.Api;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,6 +18,7 @@ import java.util.Objects;
  * <p>
  * 2020-05-08
  */
+@Api(tags = "菜单接口")
 @RestController
 @RequestMapping("/channel")
 public class ChannelController extends BaseController {
